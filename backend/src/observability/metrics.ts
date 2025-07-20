@@ -14,6 +14,12 @@ export const successCounter = new Counter({
   help: "Total number of successful (errorless) application calls.",
 });
 
+export const unexpectedDigitCounter = new Counter({
+  name: "unexpected_digit_count",
+  help: "Total number of times the converter tried to parse a digit that wasn't 1-9.",
+  labelNames: ["digit"],
+});
+
 const router = express.Router();
 router.get("/metrics", async (req, res) => {
   res.set("Content-Type", client.register.contentType);

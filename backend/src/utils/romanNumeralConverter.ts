@@ -1,4 +1,5 @@
 import logger from "../observability/logger";
+import { unexpectedDigitCounter } from "../observability/metrics";
 
 const KEYS: number[] = [1000, 100, 10, 1];
 const VALUES: string[] = ["M", "C", "X", "I"];
@@ -26,7 +27,8 @@ const getRomanNumeralByDigit = (digit: number, idx: number): string => {
     result.push(`${VALUES[idx]}`);
     result.push(`${VALUES[idx - 1]}`);
   } else {
-    // TODO: log error and increase metric
+    logger.error(`getRomanNumeralByDigit | Unexpected digit: ${digit}`);
+    unexpectedDigitCounter.inc({ digit });
   }
   return result.join("");
 };

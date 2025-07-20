@@ -4,6 +4,9 @@
 # testing
 **/coverage/
 
+# logs
+**/logs/
+
 # production
 **/dist/
 **/build/
@@ -12,4 +15,4 @@
 .vscode/
 
 # tools
-backend/.parcel-cache/
+frontend/.parcel-cache/

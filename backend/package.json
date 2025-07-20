@@ -1,5 +1,5 @@
 {
-  "name": "adobe-backend",
+  "name": "express-backend",
   "version": "1.0.0",
   "description": "App to convert given numbers to roman numerals.",
   "main": "index.js",
