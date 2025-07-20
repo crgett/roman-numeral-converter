@@ -4,7 +4,7 @@ Web application that converts numbers to Roman numerals.
 
 The output from this app assumes the Roman numeral specification described on [Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals).
 
-The app includes an Express backend and React frontend that utilizes components from the [Adobe React Spectrum](https://react-spectrum.adobe.com/react-spectrum/index.html). Both were written with `Typescript` to prevent runtime errors and improve development experience. Below are some dependencies, frameworks, and technologies that I decided to leverage and why I chose to use them.
+The app includes an Express backend and React frontend that utilizes components from the [Adobe React Spectrum](https://react-spectrum.adobe.com/react-spectrum/index.html) library. Both were written with `Typescript` to prevent runtime errors and improve development experience. Below are some dependencies, frameworks, and technologies that I decided to leverage and why I chose to use them.
 
 **Backend**
 
@@ -63,7 +63,7 @@ _Note_ - You will need to have [Node.js](https://nodejs.org/en) installed locall
 
 ## Logs
 
-Logs are output to the console and written to the `app.log` file under the logs directory. The logging level can be switched to debug when necessary to view some additional input and output logs.
+Logs are output to the console and written to the `app.log` file under the `/logs` directory. The logging level can be switched to debug when necessary to view some additional input and output logs.
 
 ## Metrics
 
@@ -72,6 +72,7 @@ Logs are output to the console and written to the `app.log` file under the logs 
 Metrics can be queried through the Prometheus client. The following are custom metrics to view API performance.
 
 - `app_errors_count` - total number of application errors.
+- `unexpected_digit_count` - total number of times the converter encounters a digit outside of 1 to 9.
 - `app_successes_count` - total number of successful (errorless) application calls.
 
 ## Traces
