@@ -1,0 +1,50 @@
+services:
+  backend:
+    build: ./backend
+    container_name: express-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    working_dir: /app
+    environment:
+      # OpenTelemetry OTLP endpoint for traces
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://jaeger:4318/v1/traces
+      # Optional: other OTEL env vars
+      - OTEL_SERVICE_NAME=express-backend
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=none
+    command: npm run dev
+
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    ports:
+      - "1234:1234"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.46
+    container_name: jaeger
+    ports:
+      - "16686:16686" # Jaeger UI
+      - "4318:4318" # OTLP HTTP traces receiver
+
+networks:
+  default:
+    driver: bridge
