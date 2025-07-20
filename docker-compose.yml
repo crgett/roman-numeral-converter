@@ -11,7 +11,7 @@ services:
     environment:
       # OpenTelemetry OTLP endpoint for traces
       - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://jaeger:4318/v1/traces
-      # Optional: other OTEL env vars
+      # Other OTEL env vars
       - OTEL_SERVICE_NAME=express-backend
       - OTEL_TRACES_EXPORTER=otlp
       - OTEL_METRICS_EXPORTER=none
@@ -27,6 +27,7 @@ services:
       - /app/node_modules
     working_dir: /app
     environment:
+      # Should enable hot reloading in Docker container
       - CHOKIDAR_USEPOLLING=true
     command: npm run dev
 

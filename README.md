@@ -26,7 +26,7 @@ The app includes an Express backend and React frontend that utilizes components 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-## Running the Application
+## Running
 
 **Docker**
 
@@ -50,16 +50,16 @@ npm install
 npm run dev
 ```
 
-_Note_ - You will need to have [Node.js](https://nodejs.org/en) installed locally to run the frontend and backend independently.
+_Note_ - You will need to have [Node.js](https://nodejs.org/en) installed locally to run `npm` commands.
 
 ## Testing
+
+The backend and frontend have independent tests that can be run with the following command.
 
 ```bash
 cd <frontend | backend>
 npm run test
 ```
-
-_Note_ - You will need to have [Node.js](https://nodejs.org/en) installed locally to run tests.
 
 ## Logs
 
@@ -94,6 +94,6 @@ GET /romannumeral?query=ope
 Response: { "error":"Invalid query string: ope" }
 ```
 
-## Future Optimizations
+## Optimizations
 
 I hardcoded some environment variables that wouldn't normally be kept in code, such as URL paths (host and port) and logging level. These values should be read from an environment variable or .env file so they can be configured without modifying code.
