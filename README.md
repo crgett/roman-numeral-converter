@@ -27,8 +27,12 @@ _Note_ - The `backend/src/utils/romanNumeralConverter.ts` file contains the func
 
 ## Prerequisites
 
+The following needs to be installed locally to build and run the app.
+
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
+
+_Note_ - `docker-compose` is included with Docker Desktop.
 
 ## Running the App
 
