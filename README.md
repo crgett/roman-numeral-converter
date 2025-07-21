@@ -2,14 +2,12 @@
 
 Web application that converts numbers to Roman numerals.
 
-The output from this app assumes the Roman numeral specification described on [Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals).
-
 The app includes an Express backend and React frontend that utilizes components from the [Adobe React Spectrum](https://react-spectrum.adobe.com/react-spectrum/index.html) library. Both were written with `Typescript` to prevent runtime errors and improve development experience. Below are some dependencies, frameworks, and technologies that I decided to leverage and why I chose to use them.
 
 **Backend**
 
 - `Nodemon` - Speeds up development by automatically restarting the node application when file changes are detected.
-- `Jest` - Popular test framework that I've used in the past.
+- `Jest` - Standard test framework that I have used in the past.
 - `OpenTelemetry` - Popular tool for gathering traces that has easy integration with Express.
 - `Jaeger` - Simple integration with OpenTelemetry to import and visualize trace data for analysis.
 - `Prometheus` - Straightforward tool for metric collection that includes a web dashboard.
@@ -21,12 +19,18 @@ The app includes an Express backend and React frontend that utilizes components 
 - `Jest` - Simple test framework that is also used by Adobe React Spectrum.
 - `Prettier` - Helpful to ensure consistent code formatting that, in my opinion, can be especially useful for React development.
 
+## Conversion Logic
+
+The Roman numeral conversion in this app follows the `Standard form` format described on [Wikipedia](https://en.wikipedia.org/wiki/Roman_numerals).
+
+_Note_ - The `backend/src/utils/romanNumeralConverter.ts` file contains the function responsible for converting a given number to Roman numerals, along with a detailed explanation of the logical approach used to perform the transformation.
+
 ## Prerequisites
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-## Running
+## Running the App
 
 **Docker**
 
@@ -38,7 +42,7 @@ docker-compose up --build
 - Web UI - http://localhost:1234
 - Backend API - http://localhost:3000/romannumeral?query={number}
 
-_Note_ - This application can be worked on exclusively with Docker and a text editor. The backend will hot reload with `Nodemon` when files are changed, however the frontend will not hot reload at this time. `Parcel` supports hot reloading, but for some (unknown to me) reason file changes are not triggering rebuilds with the current config.
+_Note_ - This application can be developed entirely using Docker and a text editor. The backend supports hot reloading with `Nodemon` when files change, however the frontend does not currently hot reload. `Parcel` supports hot reloading, but for some reason (unknown to me) file changes are not triggering rebuilds with the current configuration.
 
 **Independently**
 
@@ -63,7 +67,7 @@ npm run test
 
 ## Logs
 
-Logs are output to the console and written to the `app.log` file under the `/logs` directory. The logging level can be switched to debug when necessary to view some additional input and output logs.
+Logs are output to the console and written to the `app.log` file under the `/logs` directory. The logging level can be switched to `debug` when necessary to view some additional logs that may be helpful.
 
 ## Metrics
 
@@ -91,9 +95,10 @@ GET /romannumeral?query=1234
 Response: { "input": "1234", "output": "MCCXXXIV" }
 
 GET /romannumeral?query=ope
-Response: { "error":"Invalid query string: ope" }
+Response: { "error": "Invalid query string: ope" }
 ```
 
 ## Optimizations
 
-I hardcoded some environment variables that wouldn't normally be kept in code, such as URL paths (host and port) and logging level. These values should be read from an environment variable or .env file so they can be configured without modifying code.
+- I hardcoded some environment variables that typically wouldn't be kept directly in the code - such as URL paths (host and port) and logging level. These values should be read from environment variables or a `.env` file so they can be configured without modifying the codebase.
+- Monitors should be configured on key metrics - specifically `app_errors_count` and `unexpected_digit_count` - to alert developers when system performance degrades.
